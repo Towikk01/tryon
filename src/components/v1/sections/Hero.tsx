@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, Lock, Dumbbell } from "lucide-react";
-import { Button } from "../ui/Button";
-import { Eyebrow } from "../ui/Eyebrow";
+import { Button } from "../Button";
+import { Eyebrow } from "../../ui/Eyebrow";
 import { heroChips } from "@/lib/data";
 import heroPhoto1 from "@/images/hm.jpeg";
 import heroPhoto2 from "@/images/03a06362-1a2a-41e4-bd22-c62280d50855.jpeg";
