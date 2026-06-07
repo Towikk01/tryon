@@ -5,36 +5,48 @@ import { testimonials } from "@/lib/data";
 
 export function Testimonials() {
   return (
-    <section id="reviews" className="bg-gray-50 py-20 sm:py-28">
+    <section id="reviews" className="bg-cream py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <Eyebrow>Результати</Eyebrow>
+        <Eyebrow>Відгуки</Eyebrow>
         <SectionHeading
-          sans="Реальні"
-          italic="відгуки"
+          sans="Вони вже"
+          italic="пройшли курс"
           className="mt-4"
         />
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 lg:grid-cols-3 lg:gap-6">
           {testimonials.map((t) => (
-            <article key={t.name} className="rounded-2xl bg-white p-8 border border-gray-200">
-              <div className="flex gap-1 text-black">
+            <article
+              key={t.name}
+              className="flex flex-col rounded-[2rem] bg-paleblue-soft p-7 sm:p-8"
+            >
+              <div className="flex gap-0.5 text-coral">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-black" />
+                  <Star key={i} className="h-5 w-5 fill-coral" />
                 ))}
               </div>
 
-              <blockquote className="mt-6 leading-relaxed text-gray-700 font-medium">
+              <blockquote className="mt-5 flex-1 font-display italic leading-relaxed text-ink">
                 &ldquo;{t.text}&rdquo;
               </blockquote>
 
-              <div className="mt-6 flex items-center justify-between gap-3 pt-6 border-t border-gray-200">
-                <div>
-                  <div className="font-bold text-black">
-                    {t.name}, {t.age}
+              <div className="mt-6 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="h-11 w-11 shrink-0 rounded-full bg-gradient-to-br from-ink to-ink-soft" />
+                  <div>
+                    <div className="text-sm font-bold text-ink">
+                      {t.name}, {t.age}
+                    </div>
+                    <div className="text-xs text-muted">{t.city}</div>
                   </div>
-                  <div className="text-xs text-gray-500">{t.city}</div>
                 </div>
-                <span className="text-xs font-bold bg-black text-white px-3 py-1.5 rounded-full">
+                <span
+                  className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold ${
+                    t.badgeTone === "coral"
+                      ? "bg-coral text-white"
+                      : "bg-paleblue text-ink"
+                  }`}
+                >
                   {t.badge}
                 </span>
               </div>

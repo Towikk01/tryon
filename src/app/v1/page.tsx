@@ -9,7 +9,7 @@ import { Footer } from "@/components/v1/Footer";
 
 export default function Home() {
   return (
-    <>
+    <div className="theme-tiffany bg-cream text-ink">
       <Header />
       <main>
         <Hero />
@@ -20,6 +20,6 @@ export default function Home() {
         <Pricing />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

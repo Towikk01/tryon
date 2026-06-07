@@ -1,23 +1,76 @@
 @import "tailwindcss";
 
+/*
+  Single design (design #1) rendered in three monochrome themes.
+  All components use semantic color tokens (coral, ink, cream, paleblue, ...).
+  Each .theme-* wrapper overrides those tokens with a one-hue + white/black
+  palette, so the same markup renders tiffany / beige / slate-blue.
+*/
+
 @theme {
-  --color-coral: #5bc2c2;
-  --color-coral-hover: #45a4a4;
-  --color-ink: #25303b;
-  --color-ink-soft: #4a5d6d;
-  --color-muted: #7a8d9d;
-  --color-line: #d7dee5;
-  --color-cream: #f5ede5;
-  --color-paleblue: #c8d6e0;
-  --color-paleblue-soft: #e8f0f4;
+  /* defaults = tiffany (design #1) */
+  --color-coral: #0fb6ae;
+  --color-coral-hover: #0c918b;
+  --color-ink: #0f2a28;
+  --color-ink-soft: #335551;
+  --color-muted: #6a8a86;
+  --color-line: #cde9e6;
+  --color-cream: #f1fbfa;
+  --color-paleblue: #a7e2dd;
+  --color-paleblue-soft: #e4f6f4;
   --color-mint: #d5edea;
-  --color-badge: #c4e4e4;
+  --color-badge: #bde7e4;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-playfair), ui-serif, Georgia, serif;
 
   --radius-card: 1.5rem;
   --radius-pill: 9999px;
+}
+
+/* ── Тіфанні (мʼятно-бірюзовий) ─────────────────────────────── */
+.theme-tiffany {
+  --color-coral: #0fb6ae;
+  --color-coral-hover: #0c918b;
+  --color-ink: #0f2a28;
+  --color-ink-soft: #335551;
+  --color-muted: #6a8a86;
+  --color-line: #cde9e6;
+  --color-cream: #f1fbfa;
+  --color-paleblue: #a7e2dd;
+  --color-paleblue-soft: #e4f6f4;
+  --color-mint: #d5edea;
+  --color-badge: #bde7e4;
+}
+
+/* ── Бежевий (теплий камель) ────────────────────────────────── */
+.theme-beige {
+  --color-coral: #a67c45;
+  --color-coral-hover: #8a6537;
+  --color-ink: #2b2418;
+  --color-ink-soft: #574b39;
+  --color-muted: #8a7c66;
+  --color-line: #e8decb;
+  --color-cream: #fbf7ef;
+  --color-paleblue: #e4d5b8;
+  --color-paleblue-soft: #f5eee0;
+  --color-mint: #ede3cf;
+  --color-badge: #e6d8bc;
+}
+
+/* ── Сіро-блакитний (slate-blue) ────────────────────────────── */
+.theme-slate {
+  --color-coral: #5c7c99;
+  --color-coral-hover: #496379;
+  --color-ink: #1e2a33;
+  --color-ink-soft: #45525e;
+  --color-muted: #76879a;
+  --color-line: #d3dee6;
+  --color-cream: #f4f7fa;
+  --color-paleblue: #b9cad8;
+  --color-paleblue-soft: #e9f0f5;
+  --color-mint: #dce7ef;
+  --color-badge: #c6d6e2;
 }
 
 html,

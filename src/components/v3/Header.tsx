@@ -28,30 +28,30 @@ export function Header() {
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
         scrolled || open
-          ? "bg-gray-900/95 backdrop-blur border-b border-emerald-500/30"
+          ? "bg-cream/95 backdrop-blur border-b border-line"
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 sm:px-8">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
         <Link href="#top" aria-label="fitflow — на головну">
           <Logo />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-12">
+        <nav className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-bold text-gray-300 hover:text-emerald-400 transition-colors uppercase tracking-wide"
+              className="text-sm font-medium text-ink-soft hover:text-coral transition-colors"
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="#pricing"
-            className="inline-flex items-center justify-center bg-emerald-500 text-white px-6 py-2.5 text-sm font-bold hover:bg-emerald-600 transition-colors hover:shadow-lg uppercase tracking-tight"
+            className="inline-flex items-center justify-center rounded-full bg-coral px-6 py-2.5 text-sm font-semibold text-white hover:bg-coral-hover transition-colors"
           >
-            Почати
+            Обрати курс
           </Link>
         </nav>
 
@@ -60,21 +60,21 @@ export function Header() {
           aria-label={open ? "Закрити меню" : "Відкрити меню"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="lg:hidden -mr-2 inline-flex h-11 w-11 items-center justify-center text-white hover:bg-emerald-500/20 transition-colors"
+          className="lg:hidden -mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-ink hover:bg-paleblue/60 transition-colors"
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-emerald-500/30 bg-gray-900">
+        <div className="lg:hidden border-t border-line bg-cream">
           <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="px-3 py-3 text-lg font-bold text-gray-300 hover:text-emerald-400 hover:bg-gray-800 transition-colors uppercase tracking-wide"
+                className="rounded-xl px-3 py-3 text-lg font-medium text-ink hover:bg-paleblue/60 transition-colors"
               >
                 {link.label}
               </Link>
@@ -82,9 +82,9 @@ export function Header() {
             <Link
               href="#pricing"
               onClick={() => setOpen(false)}
-              className="mt-3 inline-flex items-center justify-center bg-emerald-500 text-white px-6 py-3.5 text-base font-bold hover:bg-emerald-600 transition-colors uppercase tracking-tight"
+              className="mt-3 inline-flex items-center justify-center rounded-full bg-coral px-6 py-3.5 text-base font-semibold text-white hover:bg-coral-hover transition-colors"
             >
-              Почати
+              Обрати курс
             </Link>
           </nav>
         </div>

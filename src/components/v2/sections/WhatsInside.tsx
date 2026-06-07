@@ -1,49 +1,50 @@
-import { Lightbulb, Users, Leaf } from "lucide-react";
+import { Clock, Users, Heart, type LucideIcon } from "lucide-react";
 import { Eyebrow } from "../../ui/Eyebrow";
 import { SectionHeading } from "../../ui/SectionHeading";
 import { whatsInside } from "@/lib/data";
 
-const iconMap: Record<"clock" | "users" | "heart", any> = {
-  clock: Lightbulb,
+const iconMap: Record<"clock" | "users" | "heart", LucideIcon> = {
+  clock: Clock,
   users: Users,
-  heart: Leaf,
+  heart: Heart,
 };
 
 export function WhatsInside() {
   return (
-    <section id="what" className="bg-white py-20 sm:py-28">
+    <section
+      id="what"
+      className="relative bg-paleblue-soft py-20 sm:py-28"
+    >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <Eyebrow>Що тебе чекає</Eyebrow>
+        <Eyebrow>Що всередині</Eyebrow>
         <SectionHeading
-          sans="Все що потрібно"
-          italic="для успіху"
-          className="mt-4 max-w-2xl"
+          sans="Три кити"
+          italic="твого результату"
+          className="mt-4 max-w-xl"
         />
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
-          {whatsInside.map((card, idx) => {
+        <div className="mt-12 grid gap-5 lg:grid-cols-3 lg:gap-6">
+          {whatsInside.map((card) => {
             const Icon = iconMap[card.icon];
             return (
               <article
                 key={card.n}
-                className="relative"
+                className="relative rounded-[2rem] bg-white p-7 sm:p-8"
               >
-                <div className="absolute top-0 left-0 text-6xl font-black text-gray-100 -z-10">
-                  {String(idx + 1).padStart(2, "0")}
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-black text-white shrink-0">
-                    <Icon className="h-6 w-6" strokeWidth={2} />
+                <div className="flex items-start justify-between">
+                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-coral/10 text-coral">
+                    <Icon className="h-7 w-7" strokeWidth={2} />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-black">
-                      {card.title}
-                    </h3>
-                    <p className="mt-2 leading-relaxed text-gray-600">
-                      {card.text}
-                    </p>
-                  </div>
+                  <span className="font-display text-2xl italic text-ink/20">
+                    {card.n}
+                  </span>
                 </div>
+                <h3 className="mt-7 text-xl font-bold text-ink">
+                  {card.title}
+                </h3>
+                <p className="mt-3 leading-relaxed text-ink-soft">
+                  {card.text}
+                </p>
               </article>
             );
           })}

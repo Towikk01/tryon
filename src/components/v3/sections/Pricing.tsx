@@ -1,54 +1,55 @@
-import { Check, Zap } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { Button } from "../Button";
+import { Eyebrow } from "../../ui/Eyebrow";
+import { SectionHeading } from "../../ui/SectionHeading";
 import { pricing } from "@/lib/data";
 
 export function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative bg-gray-900 py-20 sm:py-28"
+      className="relative bg-paleblue-soft py-20 sm:py-28"
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <p className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.18em] text-emerald-400">
-          <span aria-hidden className="text-emerald-400">//</span>
-          <span>Тарифи</span>
-        </p>
-        <h2 className="mt-4 max-w-2xl text-4xl sm:text-5xl leading-[1.02] font-black tracking-tight text-white">
-          Обери свій <span className="text-emerald-500">план</span>
-        </h2>
-        <p className="mt-5 max-w-xl text-lg leading-relaxed text-gray-300">
+        <Eyebrow>Тарифи</Eyebrow>
+        <SectionHeading
+          sans="Обери свій"
+          italic="формат"
+          className="mt-4 max-w-2xl"
+        />
+        <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
           Усі тарифи з гарантією повернення коштів протягом 7 днів. Можна
           оплатити карткою або частинами.
         </p>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3 lg:items-stretch">
+        <div className="mt-12 grid gap-5 lg:grid-cols-3 lg:items-stretch lg:gap-6">
           {pricing.map((plan) => (
             <article
               key={plan.id}
-              className={`relative flex flex-col border-2 p-8 transition-all ${
+              className={`relative flex flex-col rounded-[2rem] p-7 sm:p-8 ${
                 plan.featured
-                  ? "border-emerald-500 bg-gradient-to-br from-emerald-500/10 to-emerald-600/10 lg:scale-105 shadow-2xl"
-                  : "border-gray-700 bg-gray-800/40 hover:border-emerald-500"
+                  ? "bg-ink text-white shadow-[0_30px_60px_-30px_rgba(221,107,74,0.6)] lg:-mt-4 lg:mb-4"
+                  : "bg-white text-ink"
               }`}
             >
               {plan.featured && (
-                <span className="absolute -top-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 bg-emerald-500 px-4 py-2 text-xs font-black uppercase tracking-widest text-white">
-                  <Zap className="h-3.5 w-3.5" />
-                  Хіт
+                <span className="absolute -top-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-coral px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Хіт продажів
                 </span>
               )}
 
               <div>
                 <h3
-                  className={`text-2xl font-black uppercase tracking-tight ${
-                    plan.featured ? "text-emerald-400" : "text-white"
+                  className={`text-2xl font-extrabold ${
+                    plan.featured ? "text-white" : "text-ink"
                   }`}
                 >
                   {plan.name}
                 </h3>
                 <p
-                  className={`mt-1 text-sm font-bold ${
-                    plan.featured ? "text-emerald-300" : "text-gray-400"
+                  className={`mt-1 text-sm ${
+                    plan.featured ? "text-white/70" : "text-muted"
                   }`}
                 >
                   {plan.tagline}
@@ -57,15 +58,15 @@ export function Pricing() {
 
               <div className="mt-7 flex items-baseline gap-2">
                 <span
-                  className={`text-5xl font-black tracking-tight ${
-                    plan.featured ? "text-emerald-400" : "text-emerald-500"
+                  className={`text-5xl font-extrabold tracking-tight ${
+                    plan.featured ? "text-coral" : "text-coral"
                   }`}
                 >
                   {plan.price}
                 </span>
                 <span
-                  className={`text-base font-bold ${
-                    plan.featured ? "text-emerald-300" : "text-gray-400"
+                  className={`text-base font-medium ${
+                    plan.featured ? "text-white/70" : "text-muted"
                   }`}
                 >
                   {plan.currency}
@@ -74,16 +75,16 @@ export function Pricing() {
 
               <ul className="mt-7 flex flex-1 flex-col gap-3.5">
                 {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm font-medium">
+                  <li key={f} className="flex items-start gap-3 text-sm">
                     <Check
                       className={`mt-0.5 h-4 w-4 shrink-0 ${
-                        plan.featured ? "text-emerald-400" : "text-emerald-500"
+                        plan.featured ? "text-coral" : "text-coral"
                       }`}
                       strokeWidth={3}
                     />
                     <span
                       className={
-                        plan.featured ? "text-gray-100" : "text-gray-300"
+                        plan.featured ? "text-white/90" : "text-ink-soft"
                       }
                     >
                       {f}
@@ -103,7 +104,7 @@ export function Pricing() {
           ))}
         </div>
 
-        <p className="mt-10 text-center text-sm text-gray-500 font-bold uppercase tracking-wide">
+        <p className="mt-10 text-center text-sm text-muted">
           🔒 Безпечна оплата · LiqPay · Apple Pay · Google Pay
         </p>
       </div>

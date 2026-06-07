@@ -4,11 +4,11 @@ import type { ReactNode } from "react";
 type Variant = "primary" | "outline";
 
 const base =
-  "inline-flex w-full items-center justify-center gap-2 rounded-lg px-7 py-4 text-base font-semibold transition-colors duration-200 select-none";
+  "inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold transition-colors duration-200 select-none";
 
 const styles: Record<Variant, string> = {
-  primary: "bg-black text-white hover:bg-gray-900",
-  outline: "border-2 border-black text-black hover:bg-black hover:text-white",
+  primary: "bg-coral text-white hover:bg-coral-hover",
+  outline: "border-2 border-coral text-coral hover:bg-coral hover:text-white",
 };
 
 type Props = LinkProps & {
