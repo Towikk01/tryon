@@ -8,18 +8,18 @@
 */
 
 @theme {
-  /* defaults = tiffany (design #1) */
-  --color-coral: #0fb6ae;
-  --color-coral-hover: #0c918b;
-  --color-ink: #0f2a28;
-  --color-ink-soft: #335551;
-  --color-muted: #6a8a86;
-  --color-line: #cde9e6;
-  --color-cream: #f1fbfa;
-  --color-paleblue: #a7e2dd;
-  --color-paleblue-soft: #e4f6f4;
-  --color-mint: #d5edea;
-  --color-badge: #bde7e4;
+  /* defaults = greige + periwinkle (design #1) */
+  --color-coral: #7588bf;
+  --color-coral-hover: #6273ae;
+  --color-ink: #2b2e33;
+  --color-ink-soft: #555a62;
+  --color-muted: #888d95;
+  --color-line: #e1dfd9;
+  --color-cream: #efede7;
+  --color-paleblue: #c2cbe6;
+  --color-paleblue-soft: #eceef6;
+  --color-mint: #dee3f1;
+  --color-badge: #cbd4ed;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-playfair), ui-serif, Georgia, serif;
@@ -28,34 +28,34 @@
   --radius-pill: 9999px;
 }
 
-/* ── Тіфанні (мʼятно-бірюзовий) ─────────────────────────────── */
-.theme-tiffany {
-  --color-coral: #0fb6ae;
-  --color-coral-hover: #0c918b;
-  --color-ink: #0f2a28;
-  --color-ink-soft: #335551;
-  --color-muted: #6a8a86;
-  --color-line: #cde9e6;
-  --color-cream: #f1fbfa;
-  --color-paleblue: #a7e2dd;
-  --color-paleblue-soft: #e4f6f4;
-  --color-mint: #d5edea;
-  --color-badge: #bde7e4;
+/* ── Greige + перивінкл (як reformme) — мʼякий теплий сірий + барвінковий синій ── */
+.theme-greige {
+  --color-coral: #7588bf;
+  --color-coral-hover: #6273ae;
+  --color-ink: #2b2e33;
+  --color-ink-soft: #555a62;
+  --color-muted: #888d95;
+  --color-line: #e1dfd9;
+  --color-cream: #efede7;
+  --color-paleblue: #c2cbe6;
+  --color-paleblue-soft: #eceef6;
+  --color-mint: #dee3f1;
+  --color-badge: #cbd4ed;
 }
 
-/* ── Бежевий (теплий камель) ────────────────────────────────── */
-.theme-beige {
-  --color-coral: #a67c45;
-  --color-coral-hover: #8a6537;
-  --color-ink: #2b2418;
-  --color-ink-soft: #574b39;
-  --color-muted: #8a7c66;
-  --color-line: #e8decb;
-  --color-cream: #fbf7ef;
-  --color-paleblue: #e4d5b8;
-  --color-paleblue-soft: #f5eee0;
-  --color-mint: #ede3cf;
-  --color-badge: #e6d8bc;
+/* ── Кремовий + dusty rose (як dreamfit) — тепле айворі + припилений рожевий ── */
+.theme-blush {
+  --color-coral: #cb8198;
+  --color-coral-hover: #b56a81;
+  --color-ink: #2f2a28;
+  --color-ink-soft: #5c534d;
+  --color-muted: #8c817a;
+  --color-line: #ebe1d6;
+  --color-cream: #f6f0e8;
+  --color-paleblue: #aeb9e0;
+  --color-paleblue-soft: #f1eef6;
+  --color-mint: #ecd9df;
+  --color-badge: #d8def2;
 }
 
 /* ── Сіро-блакитний (slate-blue) ────────────────────────────── */

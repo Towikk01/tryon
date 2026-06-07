@@ -9,7 +9,7 @@ import { Footer } from "@/components/v2/Footer";
 
 export default function Home() {
   return (
-    <div className="theme-beige bg-cream text-ink">
+    <div className="theme-blush bg-cream text-ink">
       <Header />
       <main>
         <Hero />

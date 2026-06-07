@@ -6,19 +6,19 @@ export default function Home() {
   const designs = [
     {
       version: "v1",
-      title: "Дизайн 1 · Тіфанні",
-      description: "Базовий дизайн у моно-палітрі тіфанні (мʼятно-бірюзовий) з білим та чорним. Свіжий і чистий.",
-      colors: "Тіфанні + білий/чорний",
+      title: "Дизайн 1 · Greige + барвінковий",
+      description: "Той самий дизайн у мʼякій палітрі теплого сірого з барвінковим (перивінкл) акцентом. Елегантний і спокійний.",
+      colors: "Greige + барвінковий синій",
       fonts: "Inter + Playfair",
-      features: ["Моно-колір", "Тіфанні акцент", "Класичні закруглені кути"],
+      features: ["Мʼяка палітра", "Барвінковий акцент", "Багато білого"],
     },
     {
       version: "v2",
-      title: "Дизайн 2 · Бежевий",
-      description: "Той самий дизайн у теплій моно-палітрі бежевого (камель) з білим та чорним. Мʼякий і затишний.",
-      colors: "Бежевий + білий/чорний",
+      title: "Дизайн 2 · Кремовий + rose",
+      description: "Той самий дизайн у теплій кремовій палітрі з припиленим рожевим (dusty rose) акцентом. Затишний і ніжний.",
+      colors: "Кремовий + dusty rose",
       fonts: "Inter + Playfair",
-      features: ["Моно-колір", "Теплий камель", "Класичні закруглені кути"],
+      features: ["Тепле айворі", "Dusty rose акцент", "Багато білого"],
     },
     {
       version: "v3",
@@ -118,26 +118,26 @@ export default function Home() {
           </h2>
           <p className="text-gray-700 text-lg mb-6">
             Це один і той же дизайн (Дизайн 1) з однаковим контентом, представлений
-            у трьох моно-колірних палітрах з білим та чорним. Усі три версії повністю
+            у трьох мʼяких колірних палітрах. Усі три версії повністю
             функціональні та готові до демонстрації клієнту.
           </p>
           <ul className="space-y-3 text-gray-700">
             <li className="flex gap-3">
               <span className="text-2xl">→</span>
               <span>
-                <strong>/v1</strong> — Моно-палітра тіфанні (мʼятно-бірюзовий)
+                <strong>/v1</strong> — Greige + барвінковий синій (як reformme)
               </span>
             </li>
             <li className="flex gap-3">
               <span className="text-2xl">→</span>
               <span>
-                <strong>/v2</strong> — Моно-палітра бежевого (камель)
+                <strong>/v2</strong> — Кремовий + dusty rose (як dreamfit)
               </span>
             </li>
             <li className="flex gap-3">
               <span className="text-2xl">→</span>
               <span>
-                <strong>/v3</strong> — Моно-палітра сіро-блакитного (slate)
+                <strong>/v3</strong> — Сіро-блакитний (slate)
               </span>
             </li>
           </ul>
