@@ -22,7 +22,7 @@ export function Hero() {
               30-денний онлайн-курс
             </Eyebrow>
 
-            <h1 className="text-5xl font-extrabold leading-[0.95] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+            <h1 className="text-glow text-5xl font-extrabold leading-[0.95] tracking-tight text-ink sm:text-6xl lg:text-7xl">
               BE STRONG.
               <br />
               <span className="font-display font-bold italic text-coral">

@@ -5,7 +5,7 @@ import { testimonials } from "@/lib/data";
 
 export function Testimonials() {
   return (
-    <section id="reviews" className="bg-cream py-20 sm:py-28">
+    <section id="reviews" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Eyebrow>Відгуки</Eyebrow>
         <SectionHeading

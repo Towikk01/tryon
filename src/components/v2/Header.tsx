@@ -49,9 +49,9 @@ export function Header() {
           ))}
           <Link
             href="#pricing"
-            className="inline-flex items-center justify-center rounded-full bg-coral px-6 py-2.5 text-sm font-semibold text-white hover:bg-coral-hover transition-colors"
+            className="cta inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold"
           >
-            Обрати курс
+            <span className="cta-label">Обрати курс</span>
           </Link>
         </nav>
 
@@ -82,9 +82,9 @@ export function Header() {
             <Link
               href="#pricing"
               onClick={() => setOpen(false)}
-              className="mt-3 inline-flex items-center justify-center rounded-full bg-coral px-6 py-3.5 text-base font-semibold text-white hover:bg-coral-hover transition-colors"
+              className="cta mt-3 inline-flex items-center justify-center rounded-full px-6 py-3.5 text-base font-semibold"
             >
-              Обрати курс
+              <span className="cta-label">Обрати курс</span>
             </Link>
           </nav>
         </div>
