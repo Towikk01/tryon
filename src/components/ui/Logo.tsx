@@ -1,15 +1,18 @@
+import Image from "next/image";
+import logo from "@/images/tryon-logo.png";
+
 type LogoProps = {
   className?: string;
 };
 
 export function Logo({ className = "" }: LogoProps) {
   return (
-    <span
-      className={`inline-flex items-baseline text-2xl font-extrabold tracking-tight text-ink ${className}`}
-    >
-      fit
-      <span className="text-coral">flow</span>
-      <span className="ml-0.5 text-coral">.</span>
-    </span>
+    <Image
+      src={logo}
+      alt="TryOn — Спробуй на собі"
+      priority
+      sizes="120px"
+      className={`h-8 w-auto sm:h-9 ${className}`}
+    />
   );
 }

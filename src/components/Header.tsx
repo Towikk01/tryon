@@ -33,7 +33,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
-        <Link href="#top" aria-label="fitflow — на головну">
+        <Link href="#top" aria-label="TryOn — на головну">
           <Logo />
         </Link>
 

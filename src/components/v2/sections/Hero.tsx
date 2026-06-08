@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, Lock, Dumbbell } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 import { Button } from "../Button";
 import { Eyebrow } from "../../ui/Eyebrow";
 import { heroChips } from "@/lib/data";
@@ -9,12 +9,6 @@ import heroPhoto2 from "@/images/03a06362-1a2a-41e4-bd22-c62280d50855.jpeg";
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-6 pb-16 sm:pt-10">
-      <Dumbbell
-        aria-hidden
-        className="pointer-events-none absolute right-6 top-10 h-24 w-24 -rotate-12 text-paleblue sm:right-16 sm:top-16 sm:h-32 sm:w-32"
-        strokeWidth={1.5}
-      />
-
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
@@ -22,18 +16,18 @@ export function Hero() {
               30-денний онлайн-курс
             </Eyebrow>
 
-            <h1 className="text-glow text-5xl font-extrabold leading-[0.95] tracking-tight text-ink sm:text-6xl lg:text-7xl">
-              BE STRONG.
-              <br />
-              <span className="font-display font-bold italic text-coral">
-                GET HEALTH.
+            <h1 className="text-glow font-extrabold leading-[0.95] tracking-tight text-ink">
+              <span className="block text-6xl sm:text-7xl">TryOn</span>
+              <span className="mt-2 block whitespace-nowrap font-display text-4xl font-bold italic text-coral sm:text-5xl lg:text-6xl">
+                Спробуй на собі
               </span>
             </h1>
 
             <p className="mt-7 max-w-md text-lg leading-relaxed text-ink-soft">
-              Фітнес-платформа для тренувань вдома. Програма для зайнятих
-              українок <span className="font-semibold">25–40</span>: тренування
-              20–30 хв на день, без жорстких дієт.
+              Віднови своє тіло через розумний рух і відчуй легкість щодня.
+              Безпечні тренування <span className="font-semibold">20–60 хв</span>{" "}
+              у різних форматах — Pilates, stretching, functional — для
+              відновлення та зміцнення.
             </p>
 
             <ul className="mt-7 flex flex-wrap gap-2.5">

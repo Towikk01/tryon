@@ -18,7 +18,7 @@ const options: ISourceOptions = {
   fpsLimit: 60,
   detectRetina: true,
   particles: {
-    number: { value: 16 },
+    number: { value: 13 },
     shape: {
       type: "image",
       options: {
@@ -66,7 +66,7 @@ export function FloatingIcons() {
       <Particles
         id="fitflow-particles"
         options={options}
-        className="pointer-events-none fixed inset-0 -z-10"
+        className="pointer-events-none fixed inset-x-0 bottom-0 top-20 -z-10"
       />
     </ParticlesProvider>
   );

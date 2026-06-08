@@ -12,6 +12,7 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <Logo />
+            <p className="mt-3 font-display text-base italic text-coral">Спробуй на собі</p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
               30-денний онлайн-курс для жінок 25–40. Тренування вдома, без
               жорстких дієт, з підтримкою кураторки і спільноти.
@@ -43,15 +44,15 @@ export function Footer() {
             <ul className="mt-4 flex flex-col gap-2.5">
               <li>
                 <a
-                  href="mailto:hello@fitflow.ua"
+                  href="mailto:hello@tryon.ua"
                   className="text-sm text-ink-soft hover:text-coral transition-colors"
                 >
-                  hello@fitflow.ua
+                  hello@tryon.ua
                 </a>
               </li>
               <li>
                 <a
-                  href="https://t.me/fitflow_ua"
+                  href="https://t.me/tryon_ua"
                   className="text-sm text-ink-soft hover:text-coral transition-colors"
                 >
                   Telegram-бот
@@ -61,7 +62,7 @@ export function Footer() {
 
             <div className="mt-5 flex gap-3">
               <a
-                href="https://instagram.com/olenafitflow"
+                href="https://instagram.com/olenatryon"
                 aria-label="Instagram"
                 target="_blank"
                 rel="noreferrer"
@@ -77,7 +78,7 @@ export function Footer() {
                 <YoutubeIcon className="h-4 w-4" />
               </a>
               <a
-                href="https://t.me/fitflow_ua"
+                href="https://t.me/tryon_ua"
                 aria-label="Telegram"
                 target="_blank"
                 rel="noreferrer"
@@ -90,7 +91,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 border-t border-line pt-8 text-center text-xs text-muted">
-          <p>© {year} fitflow · Усі права захищені</p>
+          <p>© {year} TryOn · Усі права захищені</p>
         </div>
       </div>
     </footer>

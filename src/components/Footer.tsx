@@ -12,6 +12,7 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <Logo />
+            <p className="mt-3 font-display text-base italic text-coral">Спробуй на собі</p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
               30-денний онлайн-курс для жінок 25–40. Тренування вдома, без
               жорстких дієт, з підтримкою кураторки і спільноти.
@@ -43,15 +44,15 @@ export function Footer() {
             <ul className="mt-4 flex flex-col gap-2.5">
               <li>
                 <a
-                  href="mailto:hello@fitflow.ua"
+                  href="mailto:hello@tryon.ua"
                   className="text-sm text-ink-soft hover:text-coral transition-colors"
                 >
-                  hello@fitflow.ua
+                  hello@tryon.ua
                 </a>
               </li>
               <li>
                 <a
-                  href="https://t.me/fitflow_ua"
+                  href="https://t.me/tryon_ua"
                   className="text-sm text-ink-soft hover:text-coral transition-colors"
                 >
                   Telegram-бот
@@ -61,7 +62,7 @@ export function Footer() {
 
             <div className="mt-5 flex gap-3">
               <a
-                href="https://instagram.com/olenafitflow"
+                href="https://instagram.com/olenatryon"
                 aria-label="Instagram"
                 target="_blank"
                 rel="noreferrer"
@@ -77,7 +78,7 @@ export function Footer() {
                 <YoutubeIcon className="h-4 w-4" />
               </a>
               <a
-                href="https://t.me/fitflow_ua"
+                href="https://t.me/tryon_ua"
                 aria-label="Telegram"
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-paleblue-soft text-ink hover:bg-coral hover:text-white transition-colors"
               >
@@ -88,7 +89,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} fitflow. Всі права захищені.</p>
+          <p>© {year} TryOn. Всі права захищені.</p>
           <div className="flex gap-5">
             <Link href="#" className="hover:text-coral transition-colors">
               Публічна оферта

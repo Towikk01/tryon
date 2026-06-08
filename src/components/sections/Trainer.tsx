@@ -60,20 +60,20 @@ export function Trainer() {
 
             <div className="mt-8 flex flex-wrap gap-6 text-ink-soft">
               <a
-                href="https://instagram.com/olenafitflow"
+                href="https://instagram.com/olenatryon"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-medium hover:text-coral transition-colors"
               >
                 <InstagramIcon className="h-4 w-4" />
-                @olenafitflow
+                @olenatryon
               </a>
               <a
                 href="#"
                 className="inline-flex items-center gap-2 text-sm font-medium hover:text-coral transition-colors"
               >
                 <YoutubeIcon className="h-4 w-4" />
-                FitFlow UA
+                TryOn UA
               </a>
             </div>
           </div>

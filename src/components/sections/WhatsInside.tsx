@@ -1,12 +1,13 @@
-import { Clock, Users, Heart, type LucideIcon } from "lucide-react";
+import { HeartPulse, Timer, TrendingUp, Leaf, type LucideIcon } from "lucide-react";
 import { Eyebrow } from "../ui/Eyebrow";
 import { SectionHeading } from "../ui/SectionHeading";
 import { whatsInside } from "@/lib/data";
 
-const iconMap: Record<"clock" | "users" | "heart", LucideIcon> = {
-  clock: Clock,
-  users: Users,
-  heart: Heart,
+const iconMap: Record<"heartPulse" | "timer" | "trendingUp" | "leaf", LucideIcon> = {
+  heartPulse: HeartPulse,
+  timer: Timer,
+  trendingUp: TrendingUp,
+  leaf: Leaf,
 };
 
 export function WhatsInside() {
@@ -18,12 +19,12 @@ export function WhatsInside() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Eyebrow>Що всередині</Eyebrow>
         <SectionHeading
-          sans="Три кити"
-          italic="твого результату"
+          sans="Розумний рух"
+          italic="для твого тіла"
           className="mt-4 max-w-xl"
         />
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-3 lg:gap-6">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {whatsInside.map((card) => {
             const Icon = iconMap[card.icon];
             return (

@@ -16,9 +16,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "fitflow — 30-денний онлайн-курс для жінок",
+  title: "TryOn — Спробуй на собі",
   description:
-    "Фітнес-платформа для тренувань вдома. Програма для зайнятих українок 25–40: 20–30 хв на день, без жорстких дієт.",
+    "TryOn — тренування для жінок для відновлення та зміцнення. Безпечні заняття 20–60 хв: Pilates, stretching, functional. Спробуй на собі.",
 };
 
 export const viewport: Viewport = {
