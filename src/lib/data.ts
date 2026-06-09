@@ -97,6 +97,7 @@ export const pricing = [
     id: "lite",
     name: "Lite",
     price: "1 200",
+    amount: 120000, // копійки
     currency: "грн",
     tagline: "Старт у своєму темпі",
     features: [
@@ -112,6 +113,7 @@ export const pricing = [
     id: "pro",
     name: "Pro",
     price: "2 400",
+    amount: 240000, // копійки
     currency: "грн",
     tagline: "Найпопулярніший вибір",
     features: [
@@ -128,6 +130,7 @@ export const pricing = [
     id: "vip",
     name: "VIP",
     price: "4 900",
+    amount: 490000, // копійки
     currency: "грн",
     tagline: "Максимальна підтримка",
     features: [

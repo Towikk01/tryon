@@ -1,5 +1,5 @@
 import { Check, Sparkles } from "lucide-react";
-import { Button } from "../Button";
+import { CheckoutButton } from "../CheckoutButton";
 import { Eyebrow } from "../../ui/Eyebrow";
 import { SectionHeading } from "../../ui/SectionHeading";
 import { pricing } from "@/lib/data";
@@ -93,13 +93,13 @@ export function Pricing() {
                 ))}
               </ul>
 
-              <Button
-                href={`#checkout-${plan.id}`}
+              <CheckoutButton
+                planId={plan.id}
                 variant={plan.featured ? "primary" : "outline"}
                 className="mt-8"
               >
                 {plan.cta}
-              </Button>
+              </CheckoutButton>
             </article>
           ))}
         </div>
