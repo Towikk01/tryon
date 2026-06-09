@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, Lock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "../Button";
 import { Eyebrow } from "../../ui/Eyebrow";
 import { heroChips } from "@/lib/data";
@@ -50,11 +50,6 @@ export function Hero() {
                 Дізнатись більше
               </Button>
             </div>
-
-            <p className="mt-6 flex items-center gap-2 text-sm text-muted">
-              <Lock className="h-4 w-4 text-coral" />
-              Місця обмежені · Гарантія повернення 7 днів
-            </p>
           </div>
 
           <div className="relative">
@@ -94,23 +89,6 @@ function HeroCollage() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
         <div className="absolute bottom-4 left-4 text-sm font-medium uppercase tracking-[0.2em] text-white">
           Розтяжка
-        </div>
-      </div>
-
-      <div className="absolute -bottom-6 left-1/2 flex -translate-x-1/2 items-center divide-x divide-line overflow-hidden rounded-2xl bg-white shadow-[0_12px_32px_rgba(0,0,0,0.08)]">
-        <div className="px-5 py-3 text-center">
-          <div className="text-xl font-extrabold text-coral">2400+</div>
-          <div className="text-[11px] font-medium uppercase tracking-wider text-muted">
-            учасниць
-          </div>
-        </div>
-        <div className="px-5 py-3 text-center">
-          <div className="text-xl font-extrabold text-ink">
-            4.9<span className="text-coral">★</span>
-          </div>
-          <div className="text-[11px] font-medium uppercase tracking-wider text-muted">
-            рейтинг
-          </div>
         </div>
       </div>
     </div>
