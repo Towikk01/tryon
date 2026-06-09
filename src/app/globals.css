@@ -74,6 +74,12 @@
   --color-badge: #c6d6e2;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* відступ під sticky-хедер, щоб секції не ховались під ним */
+  scroll-padding-top: 5rem;
+}
+
 html,
 body {
   color: var(--color-ink);
@@ -204,6 +210,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   .cta,
   .cta-outline {
     transition: none;
