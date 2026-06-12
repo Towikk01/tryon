@@ -30,25 +30,11 @@ export function Testimonials() {
                 &ldquo;{t.text}&rdquo;
               </blockquote>
 
-              <div className="mt-6 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="h-11 w-11 shrink-0 rounded-full bg-gradient-to-br from-ink to-ink-soft" />
-                  <div>
-                    <div className="text-sm font-bold text-ink">
-                      {t.name}, {t.age}
-                    </div>
-                    <div className="text-xs text-muted">{t.city}</div>
-                  </div>
+              <div className="mt-6 flex items-center gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-ink to-ink-soft text-sm font-bold text-white">
+                  {t.name.charAt(0)}
                 </div>
-                <span
-                  className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold ${
-                    t.badgeTone === "coral"
-                      ? "bg-coral text-white"
-                      : "bg-paleblue text-ink"
-                  }`}
-                >
-                  {t.badge}
-                </span>
+                <div className="text-sm font-bold text-ink">{t.name}</div>
               </div>
             </article>
           ))}

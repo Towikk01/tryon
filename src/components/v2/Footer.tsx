@@ -44,10 +44,10 @@ export function Footer() {
             <ul className="mt-4 flex flex-col gap-2.5">
               <li>
                 <a
-                  href="mailto:hello@tryon.ua"
+                  href="mailto:tryon160325@gmail.com"
                   className="text-sm text-ink-soft hover:text-coral transition-colors"
                 >
-                  hello@tryon.ua
+                  tryon160325@gmail.com
                 </a>
               </li>
               <li>
@@ -62,7 +62,7 @@ export function Footer() {
 
             <div className="mt-5 flex gap-3">
               <a
-                href="https://instagram.com/olenatryon"
+                href="https://www.instagram.com/zubova_yana_"
                 aria-label="Instagram"
                 target="_blank"
                 rel="noreferrer"

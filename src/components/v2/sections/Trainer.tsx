@@ -64,13 +64,13 @@ export function Trainer() {
 
             <div className="mt-8 flex flex-wrap gap-6 text-ink-soft">
               <a
-                href="https://instagram.com/olenatryon"
+                href="https://www.instagram.com/zubova_yana_"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-medium hover:text-coral transition-colors"
               >
                 <InstagramIcon className="h-4 w-4" />
-                @olenatryon
+                @zubova_yana_
               </a>
               <a
                 href="#"
