@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { createInvoice } from "@/lib/monobank";
 import { pricing } from "@/lib/data";
@@ -32,17 +33,18 @@ export async function POST(req: Request) {
   }
 
   const origin = siteOrigin(req);
-  // reference — наш id замовлення, повертається у вебхуці
-  const reference = `${plan.id}-${Date.now()}-${Math.round(
-    Math.random() * 1e6,
-  )}`;
+  // reference — наш id замовлення, повертається у вебхуці.
+  // Формат `${plan.id}-${uuid}`: префікс дає тариф, uuid робить його
+  // непідбираним (за ним потім тягнеться персональна ссилка з бота).
+  const reference = `${plan.id}-${randomUUID()}`;
 
   try {
     const invoice = await createInvoice({
       amount: plan.amount,
       reference,
       destination: `TryOn — тариф ${plan.name}`,
-      redirectUrl: `${origin}/dyakuyu`,
+      // ref у redirect — щоб сторінка "дякуємо" знала, яку ссилку показати
+      redirectUrl: `${origin}/dyakuyu?ref=${reference}`,
       webHookUrl: `${origin}/api/monobank/webhook`,
     });
 

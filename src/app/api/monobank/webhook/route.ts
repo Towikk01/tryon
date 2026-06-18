@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyWebhook, type WebhookPayload } from "@/lib/monobank";
+import { coursesForReference, createPurchaseToken } from "@/lib/coursesBot";
 
 export const runtime = "nodejs";
 
@@ -44,11 +45,36 @@ export async function POST(req: Request) {
 
   if (payload.status === "success") {
     const hrn = (payload.amount / 100).toFixed(2);
+    const reference = payload.reference;
+
+    // Видаємо доступ: створюємо одноразовий токен у боті.
+    // reference використовуємо як payment_id (унікальний, ідемпотентний).
+    let accessNote = "";
+    if (reference) {
+      const courseIds = coursesForReference(reference);
+      if (!courseIds) {
+        accessNote = `\n⚠️ Невідомий тариф у reference: <code>${reference}</code>`;
+      } else {
+        try {
+          const result = await createPurchaseToken(reference, courseIds);
+          accessNote = result.created
+            ? "\n🔑 Токен доступу створено"
+            : "\n🔁 Токен уже існував (дубль вебхука)";
+        } catch (err) {
+          console.error("createPurchaseToken failed", err);
+          accessNote = "\n❌ Не вдалося створити токен доступу — перевір бота";
+        }
+      }
+    } else {
+      accessNote = "\n⚠️ Вебхук без reference — токен не створено";
+    }
+
     await notifyOwner(
       `✅ <b>Нова оплата TryOn</b>\n` +
         `Сума: <b>${hrn} грн</b>\n` +
-        `Замовлення: <code>${payload.reference ?? "—"}</code>\n` +
-        `Invoice: <code>${payload.invoiceId}</code>`,
+        `Замовлення: <code>${reference ?? "—"}</code>\n` +
+        `Invoice: <code>${payload.invoiceId}</code>` +
+        accessNote,
     );
   }
 

@@ -50,7 +50,7 @@ export function Testimonials() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <Eyebrow>Відгуки</Eyebrow>
-            <SectionHeading sans="Вони вже" italic="пройшли курс" className="mt-4" />
+            <SectionHeading sans="Вони вже" italic="спробували" className="mt-4" />
           </div>
 
           <div className="hidden gap-2 sm:flex">

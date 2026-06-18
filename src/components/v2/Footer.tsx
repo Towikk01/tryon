@@ -14,8 +14,8 @@ export function Footer() {
             <Logo />
             <p className="mt-3 font-display text-base italic text-coral">Спробуй на собі</p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              30-денний онлайн-курс для жінок 25–40. Тренування вдома, без
-              жорстких дієт, з підтримкою кураторки і спільноти.
+              Онлайн-курс для жінок та дівчат, тренування в зручному форматі, без
+              жорстких дієт та навантажень, з турботою про Ваше здоров&apos;я.
             </p>
           </div>
 
