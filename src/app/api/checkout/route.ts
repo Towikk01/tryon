@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { createInvoice } from "@/lib/monobank";
+import { saveInvoiceId } from "@/lib/accessLinkStore";
 import { pricing } from "@/lib/data";
 
 export const runtime = "nodejs";
@@ -47,6 +48,14 @@ export async function POST(req: Request) {
       redirectUrl: `${origin}/dyakuyu?ref=${reference}`,
       webHookUrl: `${origin}/api/monobank/webhook`,
     });
+
+    // Зберігаємо invoiceId, щоб сторінка "дякуємо" могла сама перевірити статус
+    // оплати в Mono й видати доступ, не покладаючись лише на вебхук.
+    try {
+      await saveInvoiceId(reference, invoice.invoiceId);
+    } catch (err) {
+      console.error("saveInvoiceId failed (non-blocking)", err);
+    }
 
     return NextResponse.json({ pageUrl: invoice.pageUrl });
   } catch (err) {

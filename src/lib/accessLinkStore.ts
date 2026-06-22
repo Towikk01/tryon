@@ -1,28 +1,27 @@
-// Сховище reference -> telegram_link.
+// Сховище двох речей за reference:
+//   accesslink:<ref>  -> персональна telegram_link (видається після оплати)
+//   invoice:<ref>     -> invoiceId Mono (щоб сторінка "дякуємо" сама перевірила статус)
 //
-// Бот віддає персональну ссилку ЛИШЕ в момент створення токена (POST /api/tokens).
-// Ми ловимо її у вебхуці й кладемо сюди, а сторінка "дякуємо" читає звідси.
-//
-// Прод (Vercel = serverless, кілька інстансів, холодний старт): in-memory НЕ
-// переживе. Тому якщо задані UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN —
-// використовуємо Upstash Redis через REST (без додаткових пакетів). Інакше
-// фолбек у пам'ять процесу (ок для локалки / одного інстансу).
+// Якщо задані UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN — використовуємо
+// Upstash Redis через REST (durable, шариться між інстансами Vercel). Інакше —
+// фолбек у пам'ять процесу (ок лише для локалки / одного інстансу).
 
 const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL;
 const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
-// Ссилка потрібна лише в перші хвилини після оплати — TTL година з запасом.
-const TTL_SECONDS = 3600;
-const KEY_PREFIX = "accesslink:";
+const LINK_PREFIX = "accesslink:";
+const INVOICE_PREFIX = "invoice:";
+const LINK_TTL_SECONDS = 3600; // година — посилання потрібне одразу після оплати
+const INVOICE_TTL_SECONDS = 86400; // доба — стільки живе інвойс Mono
 
 const useUpstash = Boolean(UPSTASH_URL && UPSTASH_TOKEN);
 
 // --- In-memory фолбек (через globalThis, щоб пережити hot-reload у next dev) ---
 const globalForStore = globalThis as unknown as {
-  __accessLinks?: Map<string, string>;
+  __kvStore?: Map<string, string>;
 };
-const memStore = globalForStore.__accessLinks ?? new Map<string, string>();
-if (!globalForStore.__accessLinks) globalForStore.__accessLinks = memStore;
+const memStore = globalForStore.__kvStore ?? new Map<string, string>();
+if (!globalForStore.__kvStore) globalForStore.__kvStore = memStore;
 
 async function upstashCommand(command: (string | number)[]): Promise<unknown> {
   const res = await fetch(UPSTASH_URL as string, {
@@ -41,18 +40,34 @@ async function upstashCommand(command: (string | number)[]): Promise<unknown> {
   return data.result ?? null;
 }
 
-export async function saveAccessLink(reference: string, telegramLink: string): Promise<void> {
+async function kvSet(key: string, value: string, ttl: number): Promise<void> {
   if (useUpstash) {
-    await upstashCommand(["SET", KEY_PREFIX + reference, telegramLink, "EX", TTL_SECONDS]);
+    await upstashCommand(["SET", key, value, "EX", ttl]);
     return;
   }
-  memStore.set(reference, telegramLink);
+  memStore.set(key, value);
+}
+
+async function kvGet(key: string): Promise<string | null> {
+  if (useUpstash) {
+    const result = await upstashCommand(["GET", key]);
+    return typeof result === "string" ? result : null;
+  }
+  return memStore.get(key) ?? null;
+}
+
+export async function saveAccessLink(reference: string, telegramLink: string): Promise<void> {
+  await kvSet(LINK_PREFIX + reference, telegramLink, LINK_TTL_SECONDS);
 }
 
 export async function getAccessLink(reference: string): Promise<string | null> {
-  if (useUpstash) {
-    const result = await upstashCommand(["GET", KEY_PREFIX + reference]);
-    return typeof result === "string" ? result : null;
-  }
-  return memStore.get(reference) ?? null;
+  return kvGet(LINK_PREFIX + reference);
+}
+
+export async function saveInvoiceId(reference: string, invoiceId: string): Promise<void> {
+  await kvSet(INVOICE_PREFIX + reference, invoiceId, INVOICE_TTL_SECONDS);
+}
+
+export async function getInvoiceId(reference: string): Promise<string | null> {
+  return kvGet(INVOICE_PREFIX + reference);
 }

@@ -87,6 +87,31 @@ export type WebhookPayload = {
   modifiedDate?: string;
 };
 
+export type InvoiceStatusResult = {
+  invoiceId: string;
+  status: InvoiceStatus;
+  amount?: number;
+  ccy?: number;
+  reference?: string;
+};
+
+/**
+ * Перевіряє статус інвойсу напряму в Mono (не чекаючи вебхук).
+ * Використовується сторінкою "дякуємо", щоб видати доступ одразу після оплати.
+ */
+export async function getInvoiceStatus(
+  invoiceId: string,
+): Promise<InvoiceStatusResult> {
+  const res = await fetch(
+    `${API_BASE}/api/merchant/invoice/status?invoiceId=${encodeURIComponent(invoiceId)}`,
+    { headers: { "X-Token": token() }, cache: "no-store" },
+  );
+  if (!res.ok) {
+    throw new Error(`Mono invoice status failed: ${res.status}`);
+  }
+  return (await res.json()) as InvoiceStatusResult;
+}
+
 // Публічний ключ змінюється рідко — кешуємо в пам'яті процесу.
 let cachedPubKeyPem: string | null = null;
 
