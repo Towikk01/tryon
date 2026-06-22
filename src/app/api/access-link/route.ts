@@ -11,7 +11,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "ref is required" }, { status: 400 });
   }
 
-  const link = getAccessLink(ref);
+  const link = await getAccessLink(ref);
   if (!link) {
     // Вебхук ще не відпрацював — клієнт спробує ще раз.
     return NextResponse.json({ ready: false }, { status: 202 });

@@ -4,20 +4,13 @@
 const API_URL = process.env.COURSES_BOT_API_URL;
 const API_KEY = process.env.COURSES_BOT_API_KEY;
 
-// Усі тарифи дають доступ до одного спільного каналу курсу.
-// id курсу має існувати в боті (створюється через POST /api/courses).
-const SHARED_COURSE_ID = process.env.COURSES_BOT_COURSE_ID ?? "tryon";
+// Тарифи, які знає бот. Префікс reference (`${plan.id}-...`) має збігатися з цими id.
+const VALID_TIERS = new Set(["lite", "pro", "vip"]);
 
-const PLAN_COURSES: Record<string, string[]> = {
-  lite: [SHARED_COURSE_ID],
-  pro: [SHARED_COURSE_ID],
-  vip: [SHARED_COURSE_ID],
-};
-
-/** reference має формат `${plan.id}-${...}` — звідси дістаємо тариф. */
-export function coursesForReference(reference: string): string[] | null {
-  const planId = reference.split("-")[0];
-  return PLAN_COURSES[planId] ?? null;
+/** reference має формат `${plan.id}-${uuid}` — звідси дістаємо тариф (lite|pro|vip). */
+export function tierForReference(reference: string): string | null {
+  const tier = reference.split("-")[0];
+  return VALID_TIERS.has(tier) ? tier : null;
 }
 
 function config(): { url: string; key: string } {
@@ -33,19 +26,20 @@ type CreateTokenResult = {
 };
 
 /**
- * Створює одноразовий токен покупки. Ідемпотентно за payment_id:
+ * Створює одноразовий токен покупки під тариф. Ідемпотентно за payment_id:
  * повторний виклик (ретрай вебхука Mono) повертає created=false без помилки.
+ * Тривалість доступу (30/90 днів) визначає бот за тарифом.
  */
 export async function createPurchaseToken(
   paymentId: string,
-  courseIds: string[],
+  tier: string,
 ): Promise<CreateTokenResult> {
   const { url, key } = config();
 
   const res = await fetch(`${url}/api/tokens`, {
     method: "POST",
     headers: { "Content-Type": "application/json", "X-API-Key": key },
-    body: JSON.stringify({ payment_id: paymentId, course_ids: courseIds }),
+    body: JSON.stringify({ payment_id: paymentId, tier }),
     cache: "no-store",
   });
 

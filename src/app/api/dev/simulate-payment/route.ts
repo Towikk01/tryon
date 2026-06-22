@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
-import { coursesForReference, createPurchaseToken } from "@/lib/coursesBot";
+import { tierForReference, createPurchaseToken } from "@/lib/coursesBot";
 import { saveAccessLink } from "@/lib/accessLinkStore";
 
 export const runtime = "nodejs";
@@ -14,12 +14,12 @@ export const runtime = "nodejs";
 
 async function simulate(planId: string) {
   const reference = `${planId}-${randomUUID()}`;
-  const courseIds = coursesForReference(reference);
-  if (!courseIds) {
+  const tier = tierForReference(reference);
+  if (!tier) {
     return { error: `unknown plan: ${planId}`, reference: null, link: null };
   }
-  const result = await createPurchaseToken(reference, courseIds);
-  if (result.telegram_link) saveAccessLink(reference, result.telegram_link);
+  const result = await createPurchaseToken(reference, tier);
+  if (result.telegram_link) await saveAccessLink(reference, result.telegram_link);
   return { error: null, reference, link: result.telegram_link ?? null };
 }
 

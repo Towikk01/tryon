@@ -1,9 +1,18 @@
-import { HeartPulse, Timer, TrendingUp, Leaf, type LucideIcon } from "lucide-react";
+import {
+  HeartPulse,
+  Timer,
+  TrendingUp,
+  Leaf,
+  type LucideIcon,
+} from "lucide-react";
 import { Eyebrow } from "../../ui/Eyebrow";
 import { SectionHeading } from "../../ui/SectionHeading";
 import { whatsInside } from "@/lib/data";
 
-const iconMap: Record<"heartPulse" | "timer" | "trendingUp" | "leaf", LucideIcon> = {
+const iconMap: Record<
+  "heartPulse" | "timer" | "trendingUp" | "leaf",
+  LucideIcon
+> = {
   heartPulse: HeartPulse,
   timer: Timer,
   trendingUp: TrendingUp,
@@ -12,10 +21,7 @@ const iconMap: Record<"heartPulse" | "timer" | "trendingUp" | "leaf", LucideIcon
 
 export function WhatsInside() {
   return (
-    <section
-      id="what"
-      className="relative bg-paleblue-soft py-20 sm:py-28"
-    >
+    <section id="what" className="relative bg-paleblue-soft py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <Eyebrow>Що всередині</Eyebrow>
         <SectionHeading

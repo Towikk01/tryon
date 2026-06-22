@@ -1,25 +1,58 @@
 // Сховище reference -> telegram_link.
 //
-// Бот віддає персональну ссилку ЛИШЕ в момент створення токена (POST /api/tokens),
-// окремого "дістати за reference" ендпоінта в нього немає. Тому ми ловимо ссилку
-// у вебхуці й кладемо сюди, а сторінка "дякуємо" читає її звідси.
+// Бот віддає персональну ссилку ЛИШЕ в момент створення токена (POST /api/tokens).
+// Ми ловимо її у вебхуці й кладемо сюди, а сторінка "дякуємо" читає звідси.
 //
-// УВАГА: це in-memory, живе лише в пам'яті процесу. Для локалки / одного інстансу — ок.
-// На Vercel (serverless, кілька інстансів, холодний старт) НЕ переживе —
-// перед продом треба замінити на Vercel KV / Upstash Redis.
+// Прод (Vercel = serverless, кілька інстансів, холодний старт): in-memory НЕ
+// переживе. Тому якщо задані UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN —
+// використовуємо Upstash Redis через REST (без додаткових пакетів). Інакше
+// фолбек у пам'ять процесу (ок для локалки / одного інстансу).
 
-// Через globalThis, щоб пережити hot-reload у next dev (модуль переобчислюється).
+const UPSTASH_URL = process.env.UPSTASH_REDIS_REST_URL;
+const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+// Ссилка потрібна лише в перші хвилини після оплати — TTL година з запасом.
+const TTL_SECONDS = 3600;
+const KEY_PREFIX = "accesslink:";
+
+const useUpstash = Boolean(UPSTASH_URL && UPSTASH_TOKEN);
+
+// --- In-memory фолбек (через globalThis, щоб пережити hot-reload у next dev) ---
 const globalForStore = globalThis as unknown as {
   __accessLinks?: Map<string, string>;
 };
+const memStore = globalForStore.__accessLinks ?? new Map<string, string>();
+if (!globalForStore.__accessLinks) globalForStore.__accessLinks = memStore;
 
-const store = globalForStore.__accessLinks ?? new Map<string, string>();
-if (!globalForStore.__accessLinks) globalForStore.__accessLinks = store;
-
-export function saveAccessLink(reference: string, telegramLink: string): void {
-  store.set(reference, telegramLink);
+async function upstashCommand(command: (string | number)[]): Promise<unknown> {
+  const res = await fetch(UPSTASH_URL as string, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${UPSTASH_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(command),
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error(`Upstash command failed: ${res.status} ${await res.text()}`);
+  }
+  const data = (await res.json()) as { result?: unknown };
+  return data.result ?? null;
 }
 
-export function getAccessLink(reference: string): string | null {
-  return store.get(reference) ?? null;
+export async function saveAccessLink(reference: string, telegramLink: string): Promise<void> {
+  if (useUpstash) {
+    await upstashCommand(["SET", KEY_PREFIX + reference, telegramLink, "EX", TTL_SECONDS]);
+    return;
+  }
+  memStore.set(reference, telegramLink);
+}
+
+export async function getAccessLink(reference: string): Promise<string | null> {
+  if (useUpstash) {
+    const result = await upstashCommand(["GET", KEY_PREFIX + reference]);
+    return typeof result === "string" ? result : null;
+  }
+  return memStore.get(reference) ?? null;
 }
