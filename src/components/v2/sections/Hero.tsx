@@ -13,7 +13,7 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <Eyebrow variant="dash" className="mb-6">
-              30-денний онлайн-курс
+              Онлайн-курс
             </Eyebrow>
 
             <h1 className="text-glow font-extrabold leading-[0.95] tracking-tight text-ink">

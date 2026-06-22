@@ -19,7 +19,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "TryOn — Спробуй на собі",
   description:
-    "TryOn — тренування для жінок для відновлення та зміцнення. Безпечні заняття 20–60 хв: Pilates, stretching, functional. Спробуй на собі.",
+    "TryOn — тренування для жінок для відновлення та зміцнення. Безпечні Тренування 20–60 хв: Pilates, stretching, functional. Спробуй на собі.",
 };
 
 export const viewport: Viewport = {

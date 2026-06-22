@@ -61,22 +61,3 @@ export async function createPurchaseToken(
   const data = (await res.json()) as { telegram_link: string };
   return { created: true, telegram_link: data.telegram_link };
 }
-
-/** Дістає готову персональну telegram-ссылку з кешу бота. null, якщо ще не готова. */
-export async function getPurchaseLink(reference: string): Promise<string | null> {
-  const { url, key } = config();
-
-  const res = await fetch(
-    `${url}/api/purchase-link?reference=${encodeURIComponent(reference)}`,
-    { headers: { "X-API-Key": key }, cache: "no-store" },
-  );
-
-  if (res.status === 404) return null;
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Bot get purchase link failed: ${res.status} ${text}`);
-  }
-
-  const data = (await res.json()) as { telegram_link: string };
-  return data.telegram_link;
-}

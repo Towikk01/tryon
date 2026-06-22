@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { verifyWebhook, type WebhookPayload } from "@/lib/monobank";
 import { coursesForReference, createPurchaseToken } from "@/lib/coursesBot";
+import { saveAccessLink } from "@/lib/accessLinkStore";
 
 export const runtime = "nodejs";
 
@@ -57,6 +58,11 @@ export async function POST(req: Request) {
       } else {
         try {
           const result = await createPurchaseToken(reference, courseIds);
+          // Ловимо персональну ссилку й кладемо у сховище — звідти її забере
+          // сторінка "дякуємо". Бот віддає її лише тут, при створенні токена.
+          if (result.telegram_link) {
+            saveAccessLink(reference, result.telegram_link);
+          }
           accessNote = result.created
             ? "\n🔑 Токен доступу створено"
             : "\n🔁 Токен уже існував (дубль вебхука)";
