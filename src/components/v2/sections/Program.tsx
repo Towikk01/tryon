@@ -1,14 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronDown, Play, Dumbbell } from "lucide-react";
+import { Check, Play, Dumbbell } from "lucide-react";
 import { Eyebrow } from "../../ui/Eyebrow";
 import { SectionHeading } from "../../ui/SectionHeading";
-import { program } from "@/lib/data";
+
+const groups = [
+  [
+    "Розминка та мобільність",
+    "Силові вправи",
+    "Кардіонавантаження",
+    "Відновлення та розтяжка",
+  ],
+  [
+    "Більше руху та життєвого тонусу",
+    "Поступовий розвиток сили й витривалості",
+    "Збалансоване та безпечне навантаження",
+  ],
+  [
+    "Помітні зміни у самопочутті та формі",
+    "Розумне навантаження",
+    "Результат, який відчувається",
+  ],
+];
 
 export function Program() {
-  const [open, setOpen] = useState<number | null>(1);
-
   return (
     <section
       id="program"
@@ -23,58 +38,30 @@ export function Program() {
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <Eyebrow>Програма</Eyebrow>
         <SectionHeading
-          sans="4 тижні —"
+          sans="Створи свій"
           italic="чіткий план"
           className="mt-4"
         />
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-          Кожен тиждень будується на попередньому. Жодного хаосу — лише
-          системний прогрес.
+          Та отримай задоволення від процесу.
         </p>
 
-        <div className="mt-10 flex flex-col gap-3">
-          {program.map((week) => {
-            const isOpen = open === week.n;
-            return (
-              <article
-                key={week.n}
-                className="rounded-2xl bg-white transition-shadow"
-              >
-                <button
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={`week-${week.n}`}
-                  onClick={() => setOpen(isOpen ? null : week.n)}
-                  className="flex w-full items-center gap-4 px-5 py-5 text-left sm:px-7 sm:py-6"
-                >
-                  <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-coral text-sm font-semibold text-white">
-                    {week.n}
+        <div className="mt-10 grid gap-3 sm:grid-cols-3">
+          {groups.map((items, i) => (
+            <ul
+              key={i}
+              className="flex flex-col gap-4 rounded-2xl bg-white px-5 py-6 sm:px-6"
+            >
+              {items.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-coral">
+                    <Check className="h-3 w-3 text-white" strokeWidth={3} />
                   </span>
-                  <h3 className="flex-1 text-base font-bold text-ink sm:text-lg">
-                    {week.title}
-                  </h3>
-                  <ChevronDown
-                    className={`h-5 w-5 shrink-0 text-ink-soft transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-
-                <div
-                  id={`week-${week.n}`}
-                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p className="px-5 pb-6 pl-[3.75rem] leading-relaxed text-ink-soft sm:px-7 sm:pl-[4.25rem]">
-                      {week.text}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
+                  <span className="leading-snug text-ink-soft">{item}</span>
+                </li>
+              ))}
+            </ul>
+          ))}
         </div>
 
         <div className="mt-10 overflow-hidden rounded-3xl bg-ink">
