@@ -86,8 +86,8 @@ export default function AccessLink({ reference }: { reference: string }) {
         {activateCommand && (
           <div className="mt-6 rounded-2xl bg-paleblue-soft/60 px-4 py-4 text-left">
             <p className="text-sm text-ink-soft">
-              Якщо після переходу бот не відкрив доступ — надішли йому цю
-              команду:
+              Якщо ти вже купував(-ла) підписку раніше і бот не відкрив доступ
+              автоматично — перейди в бота та надішли йому цю команду:
             </p>
             <div className="mt-3 flex items-center gap-2">
               <code className="flex-1 overflow-x-auto whitespace-nowrap rounded-lg bg-cream px-3 py-2 text-xs text-ink">
