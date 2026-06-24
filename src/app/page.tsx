@@ -3,6 +3,7 @@ import { Hero } from "@/components/v2/sections/Hero";
 import { WhatsInside } from "@/components/v2/sections/WhatsInside";
 import { Trainer } from "@/components/v2/sections/Trainer";
 import { Program } from "@/components/v2/sections/Program";
+import { Inventory } from "@/components/v2/sections/Inventory";
 import { Testimonials } from "@/components/v2/sections/Testimonials";
 import { Pricing } from "@/components/v2/sections/Pricing";
 import { Footer } from "@/components/v2/Footer";
@@ -19,6 +20,7 @@ export default function Home() {
           <WhatsInside />
           <Trainer />
           <Program />
+          <Inventory />
           <Testimonials />
           <Pricing />
         </main>
