@@ -38,7 +38,12 @@ export async function createPurchaseToken(
 
   const res = await fetch(`${url}/api/tokens`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", "X-API-Key": key },
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-Key": key,
+      // ngrok free інакше може віддати HTML-заглушку замість відповіді бота.
+      "ngrok-skip-browser-warning": "true",
+    },
     body: JSON.stringify({ payment_id: paymentId, tier }),
     cache: "no-store",
   });
