@@ -8,6 +8,7 @@ import carpet from "@/images/carpet.jpeg";
 import gantel from "@/images/gantel.jpeg";
 import fitboll from "@/images/fitboll.jpeg";
 import expander from "@/images/expander.jpeg";
+import ball from "@/images/ball.jpeg";
 
 const TRAINER_TG = "https://t.me/Zubova_Yana_U";
 
@@ -17,6 +18,7 @@ const items: { img: StaticImageData; label: string }[] = [
   { img: gantel, label: "Гантелі" },
   { img: fitboll, label: "Фітбол" },
   { img: expander, label: "Еспандер-резинка" },
+  { img: ball, label: "Мʼяч (20-25 см діаметр)" },
 ];
 
 export function Inventory() {
