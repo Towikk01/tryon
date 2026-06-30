@@ -92,8 +92,8 @@ export const pricing = [
   {
     id: "lite",
     name: "Lite",
-    price: "1",
-    amount: 100, // копійки
+    price: "350",
+    amount: 35000, // копійки
     currency: "грн",
     tagline: "Старт у своєму темпі",
     features: [
@@ -106,15 +106,14 @@ export const pricing = [
   {
     id: "pro",
     name: "Pro",
-    price: "2",
-    amount: 200, // копійки
+    price: "500",
+    amount: 50000, // копійки
     currency: "грн",
     tagline: "Найпопулярніший вибір",
     features: [
       "Доступ 30 днів",
       "36 тренувань (Pilates, stretching, functional, лікувальна гімнастика)",
       "+ дихальні техніки",
-      "Бонус: гайд «здорові сніданки»",
     ],
     cta: "Обрати Pro",
     featured: true,
@@ -122,8 +121,8 @@ export const pricing = [
   {
     id: "vip",
     name: "VIP",
-    price: "3",
-    amount: 300, // копійки
+    price: "1500",
+    amount: 150000, // копійки
     currency: "грн",
     tagline: "Максимальна підтримка",
     features: [
