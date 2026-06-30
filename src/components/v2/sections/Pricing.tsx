@@ -17,11 +17,6 @@ export function Pricing() {
           italic="формат"
           className="mt-4 max-w-2xl"
         />
-        <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-          Усі тарифи з гарантією повернення коштів протягом 7 днів. Можна
-          оплатити карткою або частинами.
-        </p>
-
         <div className="mt-12 grid gap-5 lg:grid-cols-3 lg:items-stretch lg:gap-6">
           {pricing.map((plan) => (
             <article
