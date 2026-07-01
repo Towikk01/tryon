@@ -7,7 +7,7 @@ import { Eyebrow } from "../../ui/Eyebrow";
 import { SectionHeading } from "../../ui/SectionHeading";
 
 const PREVIEW_VIDEO_SRC = "/program-preview.mp4";
-const PREVIEW_POSTER_SRC = "/program-poster.jpg";
+const PREVIEW_POSTER_SRC = "/program-poster-v2.jpg";
 
 const groups = [
   [
@@ -74,7 +74,7 @@ export function Program() {
           type="button"
           onClick={() => setVideoOpen(true)}
           aria-label="Дивитись огляд програми"
-          className="group relative mt-10 block aspect-video w-full overflow-hidden rounded-3xl bg-ink"
+          className="group relative mx-auto mt-10 block aspect-2/3 w-full max-w-sm overflow-hidden rounded-3xl bg-ink"
         >
           <Image
             src={PREVIEW_POSTER_SRC}
