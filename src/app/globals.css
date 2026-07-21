@@ -209,6 +209,38 @@ body {
   gap: 0.5rem;
 }
 
+/* Поля вводу (форма контактів у чекауті) */
+.field {
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1px solid var(--color-line);
+  background: #fff;
+  padding: 0.7rem 0.95rem;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.field::placeholder {
+  color: var(--color-muted);
+}
+.field:focus {
+  border-color: var(--color-coral);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-coral) 22%, transparent);
+}
+
+/* Посилання в юридичних текстах */
+.link {
+  color: var(--color-coral);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.link:hover {
+  color: var(--color-coral-hover);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -1,31 +1,10 @@
 import { NextResponse } from "next/server";
 import { verifyWebhook, type WebhookPayload } from "@/lib/monobank";
 import { tierForReference, createPurchaseToken } from "@/lib/coursesBot";
-import { saveAccessLink } from "@/lib/accessLinkStore";
+import { saveAccessLink, getLead } from "@/lib/accessLinkStore";
+import { notifyOwner, escapeHtml } from "@/lib/telegram";
 
 export const runtime = "nodejs";
-
-async function notifyOwner(text: string): Promise<void> {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_OWNER_CHAT_ID;
-  if (!botToken || !chatId) {
-    console.warn("Telegram notify skipped: env not set");
-    return;
-  }
-  try {
-    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text,
-        parse_mode: "HTML",
-      }),
-    });
-  } catch (err) {
-    console.error("Telegram notify failed", err);
-  }
-}
 
 export async function POST(req: Request) {
   // Важливо: читаємо СИРЕ тіло — підпис рахується саме по ньому.
@@ -75,10 +54,27 @@ export async function POST(req: Request) {
       accessNote = "\n⚠️ Вебхук без reference — токен не створено";
     }
 
+    // Підтягуємо контакт покупця, збережений на кроці checkout.
+    let contactNote = "";
+    if (reference) {
+      try {
+        const lead = await getLead(reference);
+        if (lead) {
+          contactNote =
+            `\nІм'я: <b>${escapeHtml(lead.name)}</b>` +
+            `\nEmail: <code>${escapeHtml(lead.email)}</code>` +
+            `\nТелефон: <code>${escapeHtml(lead.phone)}</code>`;
+        }
+      } catch (err) {
+        console.error("getLead failed (non-blocking)", err);
+      }
+    }
+
     await notifyOwner(
-      `✅ <b>Нова оплата TryOn</b>\n` +
-        `Сума: <b>${hrn} грн</b>\n` +
-        `Замовлення: <code>${reference ?? "—"}</code>\n` +
+      `✅ <b>Оплата TryOn</b>\n` +
+        `Сума: <b>${hrn} грн</b>` +
+        contactNote +
+        `\nЗамовлення: <code>${reference ?? "—"}</code>\n` +
         `Invoice: <code>${payload.invoiceId}</code>` +
         accessNote,
     );

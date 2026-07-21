@@ -11,8 +11,10 @@ const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
 const LINK_PREFIX = "accesslink:";
 const INVOICE_PREFIX = "invoice:";
+const LEAD_PREFIX = "lead:";
 const LINK_TTL_SECONDS = 3600; // година — посилання потрібне одразу після оплати
 const INVOICE_TTL_SECONDS = 86400; // доба — стільки живе інвойс Mono
+const LEAD_TTL_SECONDS = 86400; // доба — контакт потрібен вебхуку при оплаті
 
 const useUpstash = Boolean(UPSTASH_URL && UPSTASH_TOKEN);
 
@@ -70,4 +72,26 @@ export async function saveInvoiceId(reference: string, invoiceId: string): Promi
 
 export async function getInvoiceId(reference: string): Promise<string | null> {
   return kvGet(INVOICE_PREFIX + reference);
+}
+
+// --- Лід (контакт покупця), збережений на кроці checkout ---
+// Дає змогу вебхуку оплати дізнатись, КОМУ видано доступ, і зберегти базу.
+export type Lead = {
+  name: string;
+  email: string;
+  phone: string;
+};
+
+export async function saveLead(reference: string, lead: Lead): Promise<void> {
+  await kvSet(LEAD_PREFIX + reference, JSON.stringify(lead), LEAD_TTL_SECONDS);
+}
+
+export async function getLead(reference: string): Promise<Lead | null> {
+  const raw = await kvGet(LEAD_PREFIX + reference);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as Lead;
+  } catch {
+    return null;
+  }
 }

@@ -90,6 +90,7 @@ export function Pricing() {
 
               <CheckoutButton
                 planId={plan.id}
+                planName={plan.name}
                 variant={plan.featured ? "primary" : "outline"}
                 className="mt-8"
               >
@@ -100,7 +101,7 @@ export function Pricing() {
         </div>
 
         <p className="mt-10 text-center text-sm text-muted">
-          🔒 Безпечна оплата · LiqPay · Apple Pay · Google Pay
+          🔒 Безпечна оплата · Monobank · Apple Pay · Google Pay
         </p>
       </div>
     </section>

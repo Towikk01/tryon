@@ -90,8 +90,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-line pt-8 text-center text-xs text-muted">
+        <div className="mt-10 flex flex-col items-center gap-3 border-t border-line pt-8 text-center text-xs text-muted sm:flex-row sm:justify-between">
           <p>© {year} TryOn · Усі права захищені</p>
+          <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+            <Link
+              href="/oferta"
+              className="text-ink-soft hover:text-coral transition-colors"
+            >
+              Публічна оферта
+            </Link>
+            <Link
+              href="/polityka-konfidentsiynosti"
+              className="text-ink-soft hover:text-coral transition-colors"
+            >
+              Політика конфіденційності
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
