@@ -113,8 +113,8 @@ export default function PrivacyPage() {
               </a>
               <br />
               Telegram:{" "}
-              <a href="https://t.me/tryon_ua" className="link">
-                @tryon_ua
+              <a href="https://t.me/TryOnFitFlowBot" className="link">
+                @TryOnFitFlowBot
               </a>
             </p>
           </Section>

@@ -52,7 +52,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://t.me/tryon_ua"
+                  href="https://t.me/TryOnFitFlowBot"
                   className="text-sm text-ink-soft hover:text-coral transition-colors"
                 >
                   Telegram-бот
@@ -78,7 +78,7 @@ export function Footer() {
                 <YoutubeIcon className="h-4 w-4" />
               </a>
               <a
-                href="https://t.me/tryon_ua"
+                href="https://t.me/TryOnFitFlowBot"
                 aria-label="Telegram"
                 className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-paleblue-soft text-ink hover:bg-coral hover:text-white transition-colors"
               >
