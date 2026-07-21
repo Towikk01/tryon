@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Send, Loader2, Copy, Check } from "lucide-react";
+import { track, planFromReference, planValueUah } from "@/lib/metaPixel";
 
 type Status = "loading" | "ready" | "timeout";
 
@@ -13,6 +14,26 @@ export default function AccessLink({ reference }: { reference: string }) {
   const [status, setStatus] = useState<Status>("loading");
   const [link, setLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+
+  // Purchase шлемо, коли доступ реально видано (оплата підтверджена),
+  // а не за сам захід на сторінку. Дедуп через sessionStorage —
+  // перезавантаження сторінки не задвоїть подію.
+  useEffect(() => {
+    if (status !== "ready") return;
+    const key = `fbq-purchase-${reference}`;
+    try {
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, "1");
+    } catch {
+      // приватний режим без sessionStorage — шлемо без дедупу
+    }
+    const plan = planFromReference(reference);
+    const value = plan ? planValueUah(plan) : null;
+    track(
+      "Purchase",
+      value ? { value, currency: "UAH", content_name: plan } : undefined,
+    );
+  }, [status, reference]);
 
   useEffect(() => {
     let cancelled = false;
