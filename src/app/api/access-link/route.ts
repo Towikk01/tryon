@@ -14,10 +14,14 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "ref is required" }, { status: 400 });
   }
 
+  // `paid` — окремо від `ready`: оплата підтверджена Mono, навіть якщо ссилка
+  // з бота ще не готова. Сторінка "дякуємо" шле по ньому Purchase у пікселі,
+  // щоб подія не залежала від доступності бота.
+
   // 1. Ссилка вже готова (поклав вебхук або попередній полл) — віддаємо.
   const existing = await getAccessLink(ref);
   if (existing) {
-    return NextResponse.json({ ready: true, telegram_link: existing });
+    return NextResponse.json({ ready: true, paid: true, telegram_link: existing });
   }
 
   // 2. Знаходимо invoiceId, щоб перевірити оплату напряму.
@@ -37,21 +41,25 @@ export async function GET(req: Request) {
     // 3. Оплачено — створюємо токен у боті (ідемпотентно за payment_id=ref).
     const tier = tierForReference(ref);
     if (!tier) {
-      return NextResponse.json({ ready: false }, { status: 202 });
+      return NextResponse.json({ ready: false, paid: true }, { status: 202 });
     }
 
     const result = await createPurchaseToken(ref, tier);
     if (result.telegram_link) {
       await saveAccessLink(ref, result.telegram_link);
-      return NextResponse.json({ ready: true, telegram_link: result.telegram_link });
+      return NextResponse.json({
+        ready: true,
+        paid: true,
+        telegram_link: result.telegram_link,
+      });
     }
 
     // created=false (токен уже існував) — ссилку мав покласти попередній виклик.
     const stored = await getAccessLink(ref);
     if (stored) {
-      return NextResponse.json({ ready: true, telegram_link: stored });
+      return NextResponse.json({ ready: true, paid: true, telegram_link: stored });
     }
-    return NextResponse.json({ ready: false }, { status: 202 });
+    return NextResponse.json({ ready: false, paid: true }, { status: 202 });
   } catch (err) {
     console.error("access-link status check failed", err);
     return NextResponse.json({ ready: false }, { status: 202 });

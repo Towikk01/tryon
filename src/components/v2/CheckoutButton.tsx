@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Loader2, X } from "lucide-react";
-import { track, planValueUah } from "@/lib/metaPixel";
+import { track, planById, planParams } from "@/lib/metaPixel";
 
 type Variant = "primary" | "outline";
 
@@ -64,8 +64,9 @@ export function CheckoutButton({
       return setError("Некоректний номер телефону");
 
     setLoading(true);
-    const value = planValueUah(planId);
-    track("InitiateCheckout", value ? { value, currency: "UAH" } : undefined);
+    // Людина обрала тариф і йде на оплату — саме тут InitiateCheckout.
+    const plan = planById(planId);
+    track("InitiateCheckout", plan ? planParams(plan) : undefined);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",

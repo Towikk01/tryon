@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Send, Loader2, Copy, Check } from "lucide-react";
-import { track, planFromReference, planValueUah } from "@/lib/metaPixel";
+import { track, planFromReference, planParams } from "@/lib/metaPixel";
 
 type Status = "loading" | "ready" | "timeout";
 
@@ -12,14 +12,15 @@ const MAX_ATTEMPTS = 24; // ~60с очікування вебхука Mono
 
 export default function AccessLink({ reference }: { reference: string }) {
   const [status, setStatus] = useState<Status>("loading");
+  const [paid, setPaid] = useState(false);
   const [link, setLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  // Purchase шлемо, коли доступ реально видано (оплата підтверджена),
-  // а не за сам захід на сторінку. Дедуп через sessionStorage —
-  // перезавантаження сторінки не задвоїть подію.
+  // Purchase шлемо, коли оплату підтвердив Mono (а не за сам захід на сторінку
+  // і не за готовність ссилки з бота — інакше збій бота з'їдав би подію).
+  // Дедуп через sessionStorage — перезавантаження сторінки не задвоїть подію.
   useEffect(() => {
-    if (status !== "ready") return;
+    if (!paid) return;
     const key = `fbq-purchase-${reference}`;
     try {
       if (sessionStorage.getItem(key)) return;
@@ -28,12 +29,8 @@ export default function AccessLink({ reference }: { reference: string }) {
       // приватний режим без sessionStorage — шлемо без дедупу
     }
     const plan = planFromReference(reference);
-    const value = plan ? planValueUah(plan) : null;
-    track(
-      "Purchase",
-      value ? { value, currency: "UAH", content_name: plan } : undefined,
-    );
-  }, [status, reference]);
+    track("Purchase", plan ? planParams(plan) : undefined, reference);
+  }, [paid, reference]);
 
   useEffect(() => {
     let cancelled = false;
@@ -47,7 +44,12 @@ export default function AccessLink({ reference }: { reference: string }) {
           { cache: "no-store" },
         );
         if (res.ok) {
-          const data = (await res.json()) as { telegram_link?: string };
+          const data = (await res.json()) as {
+            paid?: boolean;
+            telegram_link?: string;
+          };
+          // 202 «ще не готово» теж може нести paid: оплата пройшла, ссилка ні.
+          if (!cancelled && data.paid) setPaid(true);
           if (!cancelled && data.telegram_link) {
             setLink(data.telegram_link);
             setStatus("ready");
