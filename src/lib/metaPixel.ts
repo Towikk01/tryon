@@ -1,5 +1,6 @@
-// Утиліти Meta Pixel. Працюють ТІЛЬКИ в браузері й тільки якщо
-// NEXT_PUBLIC_META_PIXEL_ID заданий (інакше — тихі no-op).
+// Утиліти Meta Pixel. Працюють ТІЛЬКИ в браузері.
+// ID зашитий у код (він і так публічний — видно у вихідному коді сторінки),
+// NEXT_PUBLIC_META_PIXEL_ID лишається як перевизначення для тестового пікселя.
 
 declare global {
   interface Window {
@@ -7,7 +8,8 @@ declare global {
   }
 }
 
-export const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+export const PIXEL_ID =
+  process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "2221566288628656";
 
 /** Ціни тарифів у грн — для value у подіях (дзеркало lib/data, без імпорту зайвого). */
 const PLAN_VALUE_UAH: Record<string, number> = {
