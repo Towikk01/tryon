@@ -92,10 +92,8 @@ export const pricing = [
   {
     id: "lite",
     name: "Lite",
-    // ТИМЧАСОВО: тестова ціна для перевірки Purchase у Meta Test Events.
-    // ПОВЕРНУТИ: price "350", amount 35000.
-    price: "10",
-    amount: 1000, // копійки
+    price: "350",
+    amount: 35000, // копійки
     currency: "грн",
     tagline: "Старт у своєму темпі",
     features: [
